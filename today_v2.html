@@ -62,7 +62,7 @@
 </head>
 <body>
   <div id="container"></div>
-  <p class="score">Score: <span id="score"></span></p>
+  <p class="score">Score: <span id="score">0</span></p>
   <script>
 // Define the count for each date in an object
 var countsByDate = {
@@ -141,9 +141,10 @@ var countsByDate = {
 "2023-06-01": 2,
 "2023-06-02": 1,
 };
-    var container = document.getElementById("container");
-    var scoreElement = document.getElementById("score");
-    var colors = ["today-yellow", "today-green", "today-red", "today-blue"];
+
+var container = document.getElementById("container");
+var scoreElement = document.getElementById("score");
+var colors = ["today-yellow", "today-green", "today-red", "today-blue"];
 
 // Get the current date in ISO format (YYYY-MM-DD)
 var today = new Date().toISOString().slice(0, 10);
@@ -151,6 +152,9 @@ var today = new Date().toISOString().slice(0, 10);
 // Get the count for the current date
 var count = countsByDate[today];
 var score = 178 - count;
+
+// Update the score element
+scoreElement.innerHTML = score;
 
 // Loop through the count
 for (var i = 0; i < count; i++) {
@@ -163,22 +167,22 @@ for (var i = 0; i < count; i++) {
   container.appendChild(todayElem);
 }
 
-    container.addEventListener("click", function(event) {
-      if (event.target.className.indexOf("today") > -1) {
-        event.target.parentNode.removeChild(event.target);
-        score++;
-        scoreElement.innerHTML = score;
+container.addEventListener("click", function(event) {
+  if (event.target.className.indexOf("today") > -1) {
+    event.target.parentNode.removeChild(event.target);
+    score++;
+    scoreElement.innerHTML = score;
 
     // Check if the score is 178
-if (score === 178) {
-  var celebration = document.createElement("div");
-  celebration.innerHTML = "🎉 Congratulations! The school year is complete! 👏 ";
-  celebration.className = "celebration"; // Add the CSS class to the element
-  container.appendChild(celebration);
-}
+    if (score === 178) {
+      var celebration = document.createElement("div");
+      celebration.innerHTML = "👏 Congratulations! The school year is complete! 🎉";
+      celebration.className = "celebration";
+      container.appendChild(celebration);
+    }
+  }
+});
 
-      }
-    });
   </script>
 </body>
 </html>
