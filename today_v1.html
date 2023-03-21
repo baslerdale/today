@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Today Game</title>
+  <style>
+    #container {
+      position: relative;
+      height: 500px;
+    }
+
+    .today {
+      position: absolute;
+      top: 0;
+      left: 0;
+      font-size: 36px;
+      cursor: pointer;
+    }
+
+    .today-yellow {
+      color: #FFDE00;
+    }
+
+    .today-green {
+      color: #72C267;
+    }
+
+    .today-red {
+      color: #C41230;
+    }
+
+    .today-blue {
+      color: #256CB5;
+    }
+
+    .score {
+      height: 20px;
+      background-image: linear-gradient(to left, rgba(0,0,0,0), rgba(0,0,0,1));
+      color: #fff;
+      width: 200px;
+      text-align: middle;
+      padding: 10px;
+      font-size: 20px;
+      font-weight: bold;
+}
+
+  </style>
+</head>
+<body>
+  <div id="container"></div>
+  <p class="score">Score: <span id="score">0</span></p>
+
+  <script>
+    var container = document.getElementById("container");
+    var score = 0;
+    var scoreElement = document.getElementById("score");
+    var colors = ["today-yellow", "today-green", "today-red", "today-blue"];
+
+    for (var i = 0; i < 178; i++) {
+      var today = document.createElement("span");
+      today.innerHTML = "Today";
+      today.className = "today " + colors[Math.floor(Math.random() * 4)];
+      today.style.top = Math.floor(Math.random() * 500) + "px";
+      today.style.left = Math.floor(Math.random() * 1000) + "px";
+      container.appendChild(today);
+    }
+
+    container.addEventListener("click", function(event) {
+      if (event.target.className.indexOf("today") > -1) {
+        event.target.parentNode.removeChild(event.target);
+        score++;
+        scoreElement.innerHTML = score;
+      }
+    });
+  </script>
+</body>
+</html>
