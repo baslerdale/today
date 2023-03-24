@@ -39,7 +39,7 @@
       height: 20px;
       background-image: linear-gradient(to left, rgba(0,0,0,0), rgba(0,0,0,1));
       color: #fff;
-      width: 200px;
+      width: 500px;
       text-align: middle;
       padding: 10px;
       font-size: 20px;
@@ -48,19 +48,6 @@
       
 }
     
-    .remaining {
-      height: 20px;
-      background-image: linear-gradient(to left, rgba(0,0,0,0), rgba(0,0,0,1));
-      color: #fff;
-      width: 200px;
-      text-align: middle;
-      padding: 10px;
-      font-size: 20px;
-      font-weight: bold;
-      font-family: Helvetica;
-      
-}
-
 .celebration {
   position: fixed;
   top: 20%;
@@ -79,9 +66,8 @@
   </style>
 </head>
 <body>
-  <p class="remaining">remaining: <span id="remaining">0</span></p>
   <div id="container"></div>
-  <p class="score">Score: <span id="score">0</span></p>
+  <p class="score">Score: <span id="score">0</span> (<span id="remaining">0</span> remaining)</p>
   <script>
 // Define the count for each date in an object
 var countsByDate = {
@@ -163,6 +149,7 @@ var countsByDate = {
 
 var container = document.getElementById("container");
 var scoreElement = document.getElementById("score");
+var remainingElement = document.getElementById("remaining");
 var colors = ["today-yellow", "today-green", "today-red", "today-blue"];
 
 // Get the current date in ISO format (YYYY-MM-DD)
@@ -175,8 +162,8 @@ var score = 178 - count;
 // Update the score element
 scoreElement.innerHTML = score;
 
-// Update the count element
-// remainingElement.innerHTML = count;
+// Update the score element
+remainingElement.innerHTML = count;
 
 // Loop through the count
 for (var i = 0; i < count; i++) {
@@ -194,6 +181,7 @@ container.addEventListener("click", function(event) {
     event.target.parentNode.removeChild(event.target);
     score++;
     scoreElement.innerHTML = score;
+    remainingElement.innerHTML = 178 - score;
 
     // Check if the score is 178
     if (score === 178) {
